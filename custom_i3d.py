@@ -7,7 +7,7 @@ from pytorch_i3d import InceptionI3d
 # Path to your extracted frames (adjust if needed)
 frames_dir = r"C:\Users\karlw\Desktop\tei stuff\thesis\pytorch-i3d-master\testvideos\framevideos\video1"
 model_path = r"C:\Users\karlw\Desktop\tei stuff\thesis\pytorch-i3d-master\models\rgb_imagenet.pt"
-output_path = r"C:\Users\karlw\Desktop\tei stuff\thesis\pytorch-i3d-master\testvideos\outputfeatures\output_features1.pt"
+output_path = r"C:\Users\karlw\Desktop\tei stuff\thesis\pytorch-i3d-master\testvideos\outputfeatures\output_features1.npy"
 
 # === LOAD FRAME FILENAMES ===
 print("📂 Loading frames from:", frames_dir)
@@ -46,6 +46,6 @@ with torch.no_grad():
 
 # === CONCATENATE AND SAVE ===
 features = torch.cat(all_features, dim=1)  # concat along time dimension
-torch.save(features, output_path)
+np.save(output_path, features.cpu().numpy())
 print("💾 Features saved to:", output_path)
 print("🏁 Done! Final feature shape:", features.shape)
